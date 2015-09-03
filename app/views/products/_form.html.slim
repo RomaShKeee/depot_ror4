@@ -1,0 +1,15 @@
+= form_for @product, html: { class: 'form-horizontal' } do |f|
+  == render 'shared/errors_msg', object: f.object
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :description
+    = f.text_area :description, rows: 6
+  .field
+    = f.label :image_url
+    = f.text_field :image_url
+  .field
+    = f.label :price
+    = f.text_field :price
+  .actions = f.submit
