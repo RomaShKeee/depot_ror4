@@ -10,11 +10,22 @@ html
     .navbar.navbar-default.navbar-static-top
       .container
         .navbar-header
-          = link_to 'Main', root_path, class: 'navbar-brand'
+          = link_to 'Main', store_path, class: 'navbar-brand'
         p.navbar-text.pull-right
-    .container
+    .container#columns
+      #side
+        ul
+          li
+            a href="" Home
+          li 
+            a href="" Questions
+          li
+            a href="" News
+          li
+            a href="" Contact
       = flash_messages
-      .page-header
-        h1= yield :page_header
-      == yield
+      #main
+        .page-header
+          h1 = yield :page_header
+        == yield
  
