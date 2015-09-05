@@ -24,11 +24,19 @@ RSpec.describe ProductsController, type: :controller do
   # Product. As you add validations to Product, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {  title: 'Lorem Ipsum',
+       description: 'Wibbles are fun!',
+       image_url: 'lorem.jpg',
+       price: 19.95 
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    #skip("Add a hash of attributes invalid for your model")
+    { title: '',
+      description: 'Wibbles are fun!',
+      image_url: 'lorem.exe',
+      price: 0.01 }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +111,17 @@ RSpec.describe ProductsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {  title: 'Lorem Ipsum',
+           description: 'Wibbles are fun!',
+           image_url: 'lorem.jpg',
+           price: 19.95 }
       }
 
       it "updates the requested product" do
         product = Product.create! valid_attributes
         put :update, {:id => product.to_param, :product => new_attributes}, valid_session
         product.reload
-        skip("Add assertions for updated state")
+        expect(product.attributes).to include( { "title" => 'Lorem Ipsum' } )
       end
 
       it "assigns the requested product as @product" do
@@ -142,17 +153,12 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    let(:product) {Product.create! valid_attributes}
     it "destroys the requested product" do
       product = Product.create! valid_attributes
       expect {
         delete :destroy, {:id => product.to_param}, valid_session
       }.to change(Product, :count).by(-1)
-    end
-
-    it "redirects to the products list" do
-      product = Product.create! valid_attributes
-      delete :destroy, {:id => product.to_param}, valid_session
-      expect(response).to redirect_to(products_url)
     end
   end
 
