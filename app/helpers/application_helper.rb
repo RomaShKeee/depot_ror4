@@ -1,5 +1,12 @@
 module ApplicationHelper
 
+  def hidden_div_if(condition, attributes = {}, &block)
+    if condition
+      attributes["style"] = "display: none"
+    end
+    content_tag("div", attributes, &block)
+  end
+
   def flash_messages(opts = {})
     alert_type = { success: 'alert-success', notice: 'alert-success', error: 'alert-danger', warning: 'alert-warning', info: 'alert-info'}
     flash.each do |msg_type, message|
